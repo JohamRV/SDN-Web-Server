@@ -1,0 +1,15 @@
+{
+  "name": "web-server-authentication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "develop": "node index.js"
+  },
+  "author": "Joham Romucho",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  }
+}
