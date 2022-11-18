@@ -20,6 +20,7 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
     let isAuth;
+    
     let body = { username: req.body.username, password: req.body.password }
     console.log(req.body.username);
     console.log(req.body.password);
@@ -28,13 +29,20 @@ app.post("/login", (req, res) => {
         .then(data => 
             {   
                 let path = "";
+                
                 console.log(data);
-                console.log(IP.address())
+                console.log(IP.address());
+
+
                 if(data.isAuthenticated == true){
                     path = "permission";  
                 }else{
                     path = "login";
                 }
+
+                // doPostRequest("http://controller-ip:8080/init", {"ip":IP.address()})
+                //    .then(data => {})
+                //    .catch(err => console.log(err))
 
                 res.render(path, {   
                 } );  
