@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require("path");
 const axios = require("axios");
 const { response } = require("express");
-const { Console } = require("console");
+const IP = require("ip");
 
 const app = express();
 const port = 3000;
@@ -29,6 +29,7 @@ app.post("/login", (req, res) => {
             {   
                 let path = "";
                 console.log(data);
+                console.log(IP.address())
                 if(data.isAuthenticated == true){
                     path = "permission";  
                 }else{
@@ -40,8 +41,6 @@ app.post("/login", (req, res) => {
                
             })
         .catch(err => console.log(err))
-
-    
 })
 
 app.listen(port, () => {
