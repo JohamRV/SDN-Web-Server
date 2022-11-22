@@ -14,8 +14,9 @@ app.use(express.static(path.join(__dirname, '/static')))
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/login", (req, res) => {
-    res.render("login", {
-    } );
+    messageAlert = ''   
+        
+    res.render("login", {  messageAlert  } );
 })
 
 app.post("/login", (req, res) => {
@@ -23,22 +24,34 @@ app.post("/login", (req, res) => {
     
     let body = { username: req.body.username, password: req.body.password }
     console.log(req.body.username);
-    console.log(req.body.password);
+    console.log(req.body.password); 
     
     doPostRequest("http://localhost:8080/is-authenticated", body)
         .then(data => 
             {   
                 let path = "";
-                
+                let messageAlert = "";
+
                 console.log(data);
                 console.log(IP.address());
 
-
-                if(data.isAuthenticated == true){
-                    path = "permission";  
+                if(data.header.message !== "User Authenticated"){
+                    path = "login"
+                    if(data.header.message == "Invalid User"){
+                        messageAlert = "Credenciales inválidas. Intente nuevamente"
+                    }else if(data.header.message == "Invalid Request"){
+                        messageAlert = "Intente nuevamente"
+                    }
+                    res.render(path, {   
+                        messageAlert
+                    } );  
                 }else{
-                    path = "login";
+                    if(data.body.isAuthenticated){
+                        path = "permission"
+                    }
                 }
+
+                
 
                 // doPostRequest("http://controller-ip:8080/init", {"ip":IP.address()})
                 //    .then(data => {})
