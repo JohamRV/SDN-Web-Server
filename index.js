@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require("path");
 const axios = require("axios");
 const { response } = require("express");
-const IP = require("ip");
+// const IP = require("ip");
 
 const app = express();
 const port = 3000;
@@ -33,7 +33,7 @@ app.post("/login", (req, res) => {
                 let messageAlert = "";
 
                 console.log(data);
-                console.log(IP.address());
+                // console.log(IP.address());
 
                 if(data.header.message !== "User Authenticated"){
                     path = "login"
